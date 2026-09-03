@@ -21,6 +21,7 @@ export default function Panel({
   caption,
   reverse = false,
   fullHeight = false,
+  priority = false,
   children,
 }: {
   id?: string;
@@ -33,6 +34,8 @@ export default function Panel({
   reverse?: boolean;
   /** Locks the panel to exactly one viewport, so it can be pinned. */
   fullHeight?: boolean;
+  /** Skip lazy-loading — use for a panel that sits at or near the top of the page. */
+  priority?: boolean;
   children?: ReactNode;
 }) {
   return (
@@ -44,7 +47,7 @@ export default function Panel({
     >
       {/* photograph — runs to the edge */}
       <div className="relative min-h-[52vh] md:min-h-full">
-        <Figure image={image} alt={alt} className="absolute inset-0 h-full w-full" />
+        <Figure image={image} alt={alt} priority={priority} className="absolute inset-0 h-full w-full" />
         {caption && (
           <span className="k-label absolute bottom-5 left-5 !text-[0.6rem] !text-white/75 md:bottom-7 md:left-7">
             {caption}

@@ -61,7 +61,7 @@ export default function Nav() {
             onClick={() => openConcierge()}
             className="group inline-flex items-center gap-2 rounded-full border border-[var(--ink)] px-6 py-2.5 text-[var(--ink)] transition-colors duration-300 hover:bg-[var(--ink)] hover:text-[var(--paper)]"
           >
-            <span className="k-label !tracking-[0.16em] !text-inherit">Plan Your Journey</span>
+            <span className="k-label !tracking-[0.16em] !text-inherit">Plan Your Trip</span>
             <ArrowUpRight
               size={15}
               className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -109,7 +109,7 @@ export default function Nav() {
             }}
             className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--ink)] px-6 py-4 text-[var(--paper)]"
           >
-            <span className="k-label !tracking-[0.16em] !text-inherit">Plan Your Journey</span>
+            <span className="k-label !tracking-[0.16em] !text-inherit">Plan Your Trip</span>
             <ArrowUpRight size={16} />
           </button>
         </div>

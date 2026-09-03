@@ -29,9 +29,9 @@ export default function Trust() {
           <div className="mt-20 grid grid-cols-1 gap-12 md:mt-28 md:grid-cols-12">
             <div className="md:col-span-4">
               <Reveal>
-                <p className="k-label mb-6">The Vale</p>
+                <p className="k-label mb-6">Why Choose Us</p>
                 <p className="k-panel-h text-[var(--ink)]">
-                  Twenty-six winters on these waters.
+                  26 years of experience in Kashmir.
                 </p>
               </Reveal>
             </div>

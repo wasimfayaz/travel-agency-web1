@@ -1,16 +1,16 @@
 /**
- * Content model for the SERAI — Bespoke Kashmir microsite.
- * Copy is written to read as editorial luxury while carrying the target
- * keyword clusters (Kashmir tour packages, bespoke Kashmir travel agency,
- * luxury Kashmir itineraries, Gulmarg ski, Dal Lake houseboats, Pahalgam
- * retreats, Gurez valley) naturally within headings and body prose.
+ * Content model for the SERAI Kashmir travel site.
+ * Copy is written in plain, everyday English — short sentences, common
+ * words — while still carrying the target keyword clusters (Kashmir tour
+ * packages, Kashmir travel agency, Gulmarg skiing, Dal Lake houseboats,
+ * Pahalgam trips, Gurez valley) naturally within headings and body text.
  */
 
 export const brand = {
   name: "SERAI",
-  descriptor: "Bespoke Kashmir",
+  descriptor: "Kashmir Travel Agency",
   established: "Est. Srinagar · 1998",
-  tagline: "A bespoke Kashmir travel agency composing private journeys through the Vale.",
+  tagline: "A Kashmir travel agency that plans private trips, houseboats, and tours for you.",
   email: "journeys@serai-kashmir.com",
   phoneLabel: "+91 194 000 0000",
   whatsapp: "https://wa.me/910000000000",
@@ -18,10 +18,10 @@ export const brand = {
 } as const;
 
 export const nav = [
-  { label: "Journeys", href: "#journeys" },
-  { label: "Stays", href: "#stays" },
-  { label: "Our Craft", href: "#craft" },
-  { label: "The Vale", href: "#heritage" },
+  { label: "Tour Packages", href: "#journeys" },
+  { label: "Hotels & Houseboats", href: "#stays" },
+  { label: "How We Work", href: "#craft" },
+  { label: "Why Choose Us", href: "#heritage" },
 ] as const;
 
 export type Journey = {
@@ -42,72 +42,72 @@ export const journeys: Journey[] = [
   {
     id: "dal-lake-heritage",
     index: "01",
-    name: "The Dal Lake Heritage",
+    name: "Dal Lake Houseboat Stay",
     region: "Srinagar",
     nights: "5 nights",
     route: "Srinagar · Nishat · Nagin · Old City",
     blurb:
-      "A slow immersion in the old capital. Wake aboard a private, hand-carved cedar houseboat on Dal Lake, drift the floating gardens by shikara at first light, and take the Mughal gardens before the crowds arrive.",
+      "Stay on a traditional wooden houseboat on Dal Lake in Srinagar. Take a quiet boat ride at sunrise, visit the floating vegetable market, and see the Mughal Gardens before the crowds arrive.",
     inclusions: [
-      "Private Dal Lake heritage houseboat",
-      "Dawn shikara & floating-market visit",
-      "Srinagar-born cultural historian",
+      "Your own private houseboat on Dal Lake",
+      "Sunrise boat ride & floating market visit",
+      "A local guide who knows Srinagar well",
     ],
-    priceNote: "From ₹4.8L · per couple",
+    priceNote: "From ₹4.8L per couple",
     image: "dal",
     keyword: "Dal Lake Heritage Houseboats",
   },
   {
     id: "gulmarg-alpine",
     index: "02",
-    name: "Gulmarg Alpine & Powder",
+    name: "Gulmarg Skiing Trip",
     region: "Gulmarg",
     nights: "6 nights",
     route: "Srinagar · Tangmarg · Gulmarg · Apharwat",
     blurb:
-      "The meadow of flowers turns to a private ski theatre. Days of curated Gulmarg ski experiences on Apharwat's upper bowls, guided heli-ski descents, and long evenings by the fire in a secluded pine chalet.",
+      "Ski the slopes of Gulmarg with a private instructor. Ride the world's highest cable car, try heli-skiing on fresh powder, and warm up by the fire in a cosy mountain cabin each evening.",
     inclusions: [
-      "Private heli-ski & off-piste guide",
-      "World's-highest gondola, reserved runs",
-      "Secluded alpine pine chalet",
+      "Private ski & heli-ski instructor",
+      "World's highest cable car, no queues",
+      "A cosy cabin high up in the mountains",
     ],
-    priceNote: "From ₹7.2L · per couple",
+    priceNote: "From ₹7.2L per couple",
     image: "gulmarg",
     keyword: "Gulmarg Ski Experiences",
   },
   {
     id: "pahalgam-retreat",
     index: "03",
-    name: "The Pahalgam Retreat",
+    name: "Pahalgam Valley Trip",
     region: "Pahalgam",
     nights: "4 nights",
     route: "Srinagar · Pampore · Aru · Betaab",
     blurb:
-      "An unhurried private Pahalgam retreat along the Lidder. Riverside cottages under deodar, quiet trout mornings, and horseback afternoons into the Aru and Betaab valleys with a private naturalist.",
+      "Slow down by the Lidder River in Pahalgam. Stay in a riverside cottage surrounded by pine trees, go fishing in the morning, and take a horse ride through the Aru and Betaab valleys.",
     inclusions: [
-      "Riverside deodar cottage, exclusive use",
-      "Private Lidder valley & Aru guide",
-      "Fly-fishing & meadow picnic",
+      "A riverside cottage, just for you",
+      "A private guide for Pahalgam and Aru valley",
+      "A fishing trip and picnic in the meadows",
     ],
-    priceNote: "From ₹3.9L · per couple",
+    priceNote: "From ₹3.9L per couple",
     image: "pahalgam",
     keyword: "Private Pahalgam Retreats",
   },
   {
     id: "gurez-frontier",
     index: "04",
-    name: "Gurez, the Northern Frontier",
+    name: "Gurez Valley Trip",
     region: "Gurez Valley",
     nights: "7 nights",
     route: "Srinagar · Bandipora · Razdan · Dawar",
     blurb:
-      "For the few. An offbeat Gurez Valley expedition over the Razdan Pass to the Kishanganga — Dard-Shin villages, log homes, and the pyramid of Habba Khatoon, arranged with the discretion the frontier requires.",
+      "Visit Gurez, one of the most beautiful and least-visited parts of Kashmir. Drive over the Razdan Pass, stay in a local village, and see the famous Habba Khatoon mountain peak.",
     inclusions: [
-      "Permits & frontier logistics handled",
-      "Dard-Shin village host & interpreter",
-      "Habba Khatoon base walk",
+      "All permits and travel arranged for you",
+      "A local village host and translator",
+      "A walk to the base of Habba Khatoon peak",
     ],
-    priceNote: "On request",
+    priceNote: "Price on request",
     image: "gurez",
     keyword: "Offbeat Gurez Valley Tours",
   },
@@ -116,50 +116,50 @@ export const journeys: Journey[] = [
 export const stays = [
   {
     id: "houseboats",
-    kicker: "The Cedar Houseboats",
-    title: "Handcrafted deodar, moored in stillness",
+    kicker: "Houseboats",
+    title: "Traditional houseboats on the lake",
     body:
-      "Our signature Dal and Nagin Lake houseboats are heirlooms — walnut fretwork, khatamband ceilings, and verandahs that meet the water. Each is taken on exclusive use, staffed by a private cook and a shikara at your call, so the lake becomes a wing of your home.",
+      "Our houseboats on Dal and Nagin Lake are beautifully hand-carved wooden boats, passed down through generations. You get the whole houseboat to yourself, plus a private cook and a boatman on call, so the lake feels like your own back yard.",
     image: "houseboat",
-    meta: ["Nagin & Dal Lake", "Exclusive use", "Private cook & shikara"],
+    meta: ["Nagin & Dal Lake", "Just for you", "Private cook & boatman"],
   },
   {
     id: "chalets",
-    kicker: "The Alpine Chalets",
-    title: "Firelit pine, above the tree line",
+    kicker: "Mountain Cabins",
+    title: "Cosy cabins high in the mountains",
     body:
-      "In Gulmarg and Pahalgam we hold a small collection of pine chalets and riverside cottages — deliberately few, deliberately quiet. Heli-access on request, a resident host, and the kind of silence that only altitude and deodar forest can keep.",
+      "We keep a small number of wooden cabins and riverside cottages in Gulmarg and Pahalgam — quiet, private, and never crowded. Helicopter transfers are available if you want them, plus a host who lives on site and the kind of peace only the mountains can give.",
     image: "chalet",
-    meta: ["Gulmarg & Pahalgam", "Heli-access", "Resident host"],
+    meta: ["Gulmarg & Pahalgam", "Helicopter transfers", "On-site host"],
   },
 ];
 
 export const stats = [
-  { value: "26", label: "Winters on the water" },
-  { value: "400+", label: "Private journeys composed" },
-  { value: "100%", label: "Srinagar-born specialists" },
-  { value: "31", label: "Countries hosted" },
+  { value: "26", label: "Years in business" },
+  { value: "400+", label: "Trips planned" },
+  { value: "100%", label: "Local Kashmir experts" },
+  { value: "31", label: "Countries we've served" },
 ];
 
 export const testimonials = [
   {
     quote:
-      "They did not sell us a tour of Kashmir; they lent us their Kashmir. Every door opened before we reached it, and nothing once felt arranged.",
+      "They didn't just show us Kashmir — they knew it inside out. Every door was already open before we got there, and nothing ever felt rushed or planned last-minute.",
     author: "H. & M. Renaud",
-    detail: "Private journey · Dal Lake & Gulmarg",
+    detail: "Trip to Dal Lake & Gulmarg",
   },
   {
     quote:
-      "The most discreet operators we have travelled with, anywhere. Native, unhurried, and quietly exacting about every hour.",
+      "The most professional and caring team we've ever travelled with. Friendly, relaxed, and on top of every little detail.",
     author: "A. Vill.",
-    detail: "Bespoke itinerary · Gurez & Pahalgam",
+    detail: "Custom trip to Gurez & Pahalgam",
   },
 ];
 
 export const journeyOptions = [
-  "The Dal Lake Heritage",
-  "Gulmarg Alpine & Powder",
-  "The Pahalgam Retreat",
-  "Gurez, the Northern Frontier",
-  "A wholly bespoke itinerary",
+  "Dal Lake Houseboat Stay",
+  "Gulmarg Skiing Trip",
+  "Pahalgam Valley Trip",
+  "Gurez Valley Trip",
+  "A custom trip",
 ];

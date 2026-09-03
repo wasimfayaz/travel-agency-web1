@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import { journeys } from "./data";
 import { useConcierge } from "./ConciergeContext";
 import Reveal from "./Reveal";
-import Figure from "./Figure";
 
 export default function Journeys() {
   const { openConcierge } = useConcierge();
@@ -17,72 +16,70 @@ export default function Journeys() {
           <div className="lg:col-span-5">
             <Reveal>
               <p className="k-label mb-6 flex items-center gap-3">
-                <span className="k-num text-[var(--stone)]">01</span> Curated Journeys
+                <span className="k-num text-[var(--stone)]">01</span> Tour Packages
               </p>
               <h2 className="k-h2 text-[var(--ink)]">
-                Four signature Kashmir<br className="hidden sm:block" /> tour packages.
+                Our Kashmir<br className="hidden sm:block" /> tour packages.
               </h2>
             </Reveal>
           </div>
           <div className="lg:col-span-6 lg:col-start-7 flex items-end">
             <Reveal delay={0.1}>
               <p className="k-body max-w-md">
-                Not a catalogue — a small, considered collection. Each itinerary is a starting point we
-                tailor to the season, your pace, and the doors we can open. Nothing is fixed; everything
-                is arranged.
+                We keep a few handpicked trips rather than a hundred options. Each one can be changed
+                to fit your dates and what you like — just tell us what you have in mind.
               </p>
             </Reveal>
           </div>
         </div>
 
-        {/* grid */}
-        <div className="mt-16 grid grid-cols-1 gap-x-12 gap-y-20 md:mt-24 md:grid-cols-2">
+        {/* grid — all four across one line on desktop */}
+        <div className="mt-14 grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 md:mt-20 lg:grid-cols-4">
           {journeys.map((j, i) => (
-            <Reveal key={j.id} delay={(i % 2) * 0.1} className="group">
-              <article className="flex flex-col">
+            <Reveal key={j.id} delay={i * 0.06} className="group h-full">
+              <article className="flex h-full flex-col">
                 <button
                   type="button"
                   onClick={() => openConcierge(j.name)}
-                  className="block text-left"
+                  className="flex items-baseline justify-between gap-2 border-b border-t k-hair pb-3 pt-4 text-left"
                   aria-label={`Enquire about ${j.name}`}
                 >
-                  <Figure
-                    image={j.image as "dal"}
-                    alt={`${j.name} — ${j.keyword} in ${j.region}, Kashmir`}
-                    className="aspect-[4/3] w-full"
-                  />
-                </button>
-
-                <div className="mt-6 flex items-baseline justify-between border-b k-hair pb-4">
-                  <span className="k-num text-[var(--stone)]">{j.index}</span>
-                  <span className="k-label !tracking-[0.16em]">
+                  <span className="k-num !text-[0.65rem] text-[var(--stone)]">{j.index}</span>
+                  <span className="k-label !text-[0.6rem] !tracking-[0.12em]">
                     {j.region} · {j.nights}
                   </span>
-                </div>
+                </button>
 
-                <h3 className="k-h3 mt-5 text-[var(--ink)]">{j.name}</h3>
-                <p className="k-num mt-2 text-[var(--stone)]">{j.route}</p>
+                <h3 className="k-serif mt-4 text-[1.25rem] leading-[1.15] text-[var(--ink)]">
+                  {j.name}
+                </h3>
+                <p className="k-num mt-1.5 !text-[0.65rem] text-[var(--stone)]">{j.route}</p>
 
-                <p className="k-body mt-4">{j.blurb}</p>
+                <p className="k-body mt-3 !text-[0.85rem] !leading-[1.6]">{j.blurb}</p>
 
-                <ul className="mt-6 flex flex-col gap-2.5">
+                <ul className="mt-4 flex flex-col gap-2">
                   {j.inclusions.map((inc) => (
-                    <li key={inc} className="flex items-start gap-3">
-                      <span className="mt-2.5 h-px w-4 shrink-0 bg-[var(--line-strong)]" aria-hidden />
-                      <span className="k-body !text-[0.95rem]">{inc}</span>
+                    <li key={inc} className="flex items-start gap-2.5">
+                      <span className="mt-2 h-px w-3 shrink-0 bg-[var(--line-strong)]" aria-hidden />
+                      <span className="k-body !text-[0.8rem] !leading-[1.5]">{inc}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-7 flex items-center justify-between border-t k-hair pt-5">
-                  <span className="k-label !tracking-[0.14em] text-[var(--ink)]">{j.priceNote}</span>
+                <div className="mt-auto flex items-center justify-between gap-3 border-t k-hair pt-4">
+                  <span className="k-label !text-[0.6rem] !tracking-[0.12em] !text-[var(--ink)]">
+                    {j.priceNote}
+                  </span>
                   <button
                     type="button"
                     onClick={() => openConcierge(j.name)}
-                    className="k-sweep inline-flex items-center gap-1.5 k-label !tracking-[0.14em] text-[var(--ink)]"
+                    className="group/cta !inline-flex shrink-0 items-center gap-1 border-b border-[var(--ink)]/40 pb-0.5 k-label !text-[0.6rem] !tracking-[0.12em] !text-[var(--pine)] transition-colors hover:border-[var(--pine)]"
                   >
-                    Explore itinerary
-                    <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    See Details
+                    <ArrowUpRight
+                      size={12}
+                      className="shrink-0 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
+                    />
                   </button>
                 </div>
               </article>

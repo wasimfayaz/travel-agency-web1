@@ -10,24 +10,24 @@ export default function Spotlight() {
   return (
     <div id="stays" className="scroll-mt-20">
       <Panel
-        label="The Stays — Houseboats"
-        lines={["Handcrafted", "cedar, moored", "in stillness."]}
+        label="Houseboats"
+        lines={["Traditional", "Houseboats", "on Dal Lake"]}
         image="houseboat"
-        alt="A hand-carved cedar heritage houseboat moored on Nagin Lake, Kashmir"
+        alt="A traditional wooden houseboat on Nagin Lake, Kashmir"
         caption="Nagin Lake, Srinagar"
         body={
           <>
             <p>
-              Our Dal and Nagin Lake heritage houseboats are heirlooms — walnut fretwork, khatamband
-              ceilings, verandahs that meet the water. Each is taken on exclusive use, with a private
-              cook and a shikara at your call.
+              Our houseboats on Dal and Nagin Lake are beautifully hand-carved wooden boats, passed
+              down through generations. You get the whole houseboat to yourself, plus a private cook
+              and a boatman on call.
             </p>
             <button
               type="button"
-              onClick={() => openConcierge("The Dal Lake Heritage")}
-              className="k-sweep mt-7 inline-flex items-center gap-1.5 k-label !tracking-[0.14em] !text-[var(--ink)]"
+              onClick={() => openConcierge("Dal Lake Houseboat Stay")}
+              className="group/cta mt-7 !inline-flex w-fit items-center gap-1.5 border-b border-[var(--ink)]/40 pb-1 k-label !tracking-[0.14em] !text-[var(--pine)] transition-colors hover:border-[var(--pine)]"
             >
-              Reserve on exclusive use
+              Book This Houseboat
               <ArrowUpRight size={14} />
             </button>
           </>
@@ -36,24 +36,24 @@ export default function Spotlight() {
 
       <Panel
         reverse
-        label="The Stays — Chalets"
-        lines={["Firelit pine,", "above the", "tree line."]}
+        label="Mountain Cabins"
+        lines={["Cosy Cabins", "in the", "Mountains"]}
         image="chalet"
-        alt="A secluded alpine pine chalet above Gulmarg, Kashmir, under snow"
+        alt="A wooden cabin in the snowy mountains above Gulmarg, Kashmir"
         caption="Gulmarg, 2,650m"
         body={
           <>
             <p>
-              In Gulmarg and Pahalgam we hold a small collection of pine chalets and riverside
-              cottages — deliberately few, deliberately quiet. Heli-access on request, a resident
-              host, and the silence only altitude and deodar can keep.
+              We keep a small number of wooden cabins and riverside cottages in Gulmarg and
+              Pahalgam — quiet, private, and never crowded. Helicopter transfers are available if
+              you want them, along with a host who lives on site.
             </p>
             <button
               type="button"
-              onClick={() => openConcierge("Gulmarg Alpine & Powder")}
-              className="k-sweep mt-7 inline-flex items-center gap-1.5 k-label !tracking-[0.14em] !text-[var(--ink)]"
+              onClick={() => openConcierge("Gulmarg Skiing Trip")}
+              className="group/cta mt-7 !inline-flex w-fit items-center gap-1.5 border-b border-[var(--ink)]/40 pb-1 k-label !tracking-[0.14em] !text-[var(--pine)] transition-colors hover:border-[var(--pine)]"
             >
-              Reserve on exclusive use
+              Book This Cabin
               <ArrowUpRight size={14} />
             </button>
           </>

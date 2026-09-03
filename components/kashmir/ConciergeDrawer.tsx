@@ -7,7 +7,7 @@ import { brand, journeyOptions } from "./data";
 import { useConcierge } from "./ConciergeContext";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const PARTY = ["Two travellers", "A family", "A private group", "Solo"];
+const PARTY = ["Couple", "Family", "Group", "Solo Traveller"];
 
 export default function ConciergeDrawer() {
   const { open, journey, closeConcierge } = useConcierge();
@@ -93,8 +93,8 @@ export default function ConciergeDrawer() {
             {/* header */}
             <div className="flex items-start justify-between border-b k-hair px-7 py-6 md:px-10">
               <div>
-                <p className="k-label mb-2">The Concierge</p>
-                <h2 className="k-serif text-[2rem] leading-none text-[var(--ink)]">Plan your journey</h2>
+                <p className="k-label mb-2">Get In Touch</p>
+                <h2 className="k-serif text-[2rem] leading-none text-[var(--ink)]">Plan Your Trip</h2>
               </div>
               <button
                 type="button"
@@ -113,31 +113,31 @@ export default function ConciergeDrawer() {
                     <Check size={22} />
                   </span>
                   <h3 className="k-serif text-[2rem] leading-tight text-[var(--ink)]">
-                    Your enquiry is with us.
+                    We got your message!
                   </h3>
                   <p className="k-body max-w-sm">
-                    A Srinagar-born specialist will write to you within one working day to begin shaping
-                    your itinerary — unhurried, and entirely private. With gratitude.
+                    Someone from our team will email you within a day to start planning your trip.
+                    Thank you!
                   </p>
                   <button
                     type="button"
                     onClick={closeConcierge}
                     className="k-sweep mt-2 k-label !tracking-[0.16em] text-[var(--ink)]"
                   >
-                    Return to the Vale
+                    Close
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
                   <p className="k-body !text-[0.95rem]">
-                    Tell us a little, and we will begin the conversation. No obligation, no noise.
+                    Tell us a bit about your trip and we&apos;ll get back to you. No pressure, no spam.
                   </p>
 
                   <KField label="Full name" name="name" ref={firstFieldRef} error={errors.name} />
                   <KField label="Email" name="email" type="email" error={errors.email} />
 
                   <label className="flex flex-col gap-2">
-                    <span className="k-label !tracking-[0.14em]">Journey of interest</span>
+                    <span className="k-label !tracking-[0.14em]">Which trip?</span>
                     <select
                       name="journey"
                       value={selectedJourney}
@@ -153,9 +153,9 @@ export default function ConciergeDrawer() {
                   </label>
 
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <KField label="Preferred dates" name="dates" placeholder="e.g. Sept 2026" />
+                    <KField label="When are you travelling?" name="dates" placeholder="e.g. Sept 2026" />
                     <label className="flex flex-col gap-2">
-                      <span className="k-label !tracking-[0.14em]">Party</span>
+                      <span className="k-label !tracking-[0.14em]">Who&apos;s travelling?</span>
                       <select name="party" defaultValue={PARTY[0]} className="k-input appearance-none">
                         {PARTY.map((o) => (
                           <option key={o} value={o}>
@@ -167,11 +167,11 @@ export default function ConciergeDrawer() {
                   </div>
 
                   <label className="flex flex-col gap-2">
-                    <span className="k-label !tracking-[0.14em]">A few words</span>
+                    <span className="k-label !tracking-[0.14em]">Anything else?</span>
                     <textarea
                       name="message"
                       rows={4}
-                      placeholder="What would make this journey feel like yours?"
+                      placeholder="Tell us what you'd like to do in Kashmir"
                       className="k-input resize-none"
                     />
                   </label>
@@ -180,12 +180,12 @@ export default function ConciergeDrawer() {
                     type="submit"
                     className="group mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--ink)] px-7 py-4 text-[var(--paper)] transition-colors duration-300 hover:bg-[var(--pine-deep)]"
                   >
-                    <span className="k-label !tracking-[0.16em] !text-inherit">Send to the concierge</span>
+                    <span className="k-label !tracking-[0.16em] !text-inherit">Send Message</span>
                     <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
 
                   <p className="k-num text-center text-[var(--stone)]">
-                    Or write to us — {brand.email}
+                    Or email us at {brand.email}
                   </p>
                 </form>
               )}

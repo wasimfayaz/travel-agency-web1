@@ -5,10 +5,13 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { brand } from "./data";
 import { useConcierge } from "./ConciergeContext";
 
+// Streamed directly from Pexels' CDN (free-to-use stock footage) rather than
+// self-hosted — swap for /media/hero.mp4 if you'd rather bundle your own cut.
+const HERO_VIDEO_SRC = "https://videos.pexels.com/video-files/18923430/18923430-uhd_2560_1440_30fps.mp4";
+
 /**
  * Pinned full-bleed hero. Deliberately bare: a wordmark, one line of type and
- * a single call to action, floating over the film. The video plate is left
- * blank (a deep neutral ground) until footage is dropped into /public/media.
+ * a single call to action, floating over the film.
  */
 export default function Hero() {
   const { openConcierge } = useConcierge();
@@ -46,7 +49,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="sticky top-0 z-0 h-[100svh] overflow-hidden bg-[#15140f]">
-      {/* film plate — blank until /public/media/hero.mp4 exists */}
+      {/* film plate — streamed from Pexels */}
       <video
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
@@ -58,8 +61,7 @@ export default function Hero() {
         aria-hidden="true"
         tabIndex={-1}
       >
-        <source src="/media/hero.webm" type="video/webm" />
-        <source src="/media/hero.mp4" type="video/mp4" />
+        <source src={HERO_VIDEO_SRC} type="video/mp4" />
       </video>
 
       {/* scrim — kept light; just enough to hold the type */}
@@ -87,7 +89,7 @@ export default function Hero() {
 
           {/* the single line of copy — also the page's H1 */}
           <h1 className="k-serif hidden flex-1 text-center text-[1.05rem] font-medium tracking-[0.01em] text-[var(--paper)] md:block lg:text-[1.15rem]">
-            A valley of journeys, quietly composed.
+            Plan your dream trip to Kashmir.
           </h1>
 
           {/* contact */}

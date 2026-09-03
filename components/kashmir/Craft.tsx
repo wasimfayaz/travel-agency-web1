@@ -12,15 +12,15 @@ export default function Craft() {
       fullHeight
       id="craft"
       label="How We Work"
-      lines={["Personal.", "Discreet.", "Intentful."]}
+      lines={["Personal.", "Private.", "Well Planned."]}
       image="pahalgam"
-      alt="The Lidder valley at Pahalgam, Kashmir — deodar forest above a river"
+      alt="The Lidder river valley in Pahalgam, Kashmir, surrounded by pine forest"
       caption="Lidder Valley, Pahalgam"
       body={
         <p>
-          We work by introduction. Every journey we design, from a week on the water to an expedition
-          over the Razdan Pass, is arranged with intent and precision — permits, weather windows, the
-          right host. Luxury, to us, is not in what is seen, but in what is felt.
+          We plan every trip carefully, from a relaxing week on the lake to a big trip over the
+          Razdan Pass. We sort out the permits, check the weather, and pick the right local host for
+          you — so all you have to do is enjoy the trip.
         </p>
       }
     />

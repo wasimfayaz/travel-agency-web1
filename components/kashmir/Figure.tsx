@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Art-directed figure. A duotone ground is painted first so the panel always
@@ -13,12 +13,16 @@ type Key = "hero" | "dal" | "gulmarg" | "pahalgam" | "gurez" | "houseboat" | "ch
 // Editorial landscape photography (Himalayan lake / pine / snow moods).
 const SOURCES: Record<Key, string> = {
   hero: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80",
-  dal: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1600&q=80",
+  // Streamed directly from Unsplash (free-to-use stock photography), same
+  // approach as the hero video — swap this URL to replace the About Us photo.
+  dal: "https://images.unsplash.com/photo-1661747340818-df15f186554e?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGthc2htaXIlMjB2YWxsZXl8ZW58MHx8MHx8fDA%3D",
   gulmarg: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80",
   pahalgam: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
   gurez: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80",
-  houseboat: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1600&q=80",
-  chalet: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1600&q=80",
+  // Self-hosted from /public/media — a real Kashmir houseboat, not stock.
+  houseboat: "/media/houseboat.png",
+  // Self-hosted from /public/media — a real cozy cabin, not stock.
+  chalet: "/media/cabin.png",
 };
 
 export default function Figure({
@@ -36,17 +40,23 @@ export default function Figure({
 }) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // Handle cached/already-complete images: a ref callback's synchronous
+  // check can race the browser's own "complete" bookkeeping, so re-check
+  // after paint too — this is the reliable path for a cache hit, while
+  // onLoad below covers a genuine fresh network fetch.
+  useEffect(() => {
+    const node = imgRef.current;
+    if (node?.complete && node.naturalWidth > 0) setLoaded(true);
+  }, [image]);
 
   return (
     <div className={`k-figure k-duo-${image} ${className}`}>
       {!failed && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          // Handle cached images: if the node is already complete on mount,
-          // onLoad may never fire — mark loaded from the ref callback.
-          ref={(node) => {
-            if (node?.complete && node.naturalWidth > 0) setLoaded(true);
-          }}
+          ref={imgRef}
           src={SOURCES[image]}
           alt={alt}
           loading={priority ? "eager" : "lazy"}

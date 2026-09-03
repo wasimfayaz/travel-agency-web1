@@ -5,23 +5,24 @@ import Panel from "./Panel";
 export default function Defines() {
   return (
     <Panel
+      priority
       id="defines"
-      label="What Defines Us"
-      lines={["Native.", "Discreet.", "Quietly Present."]}
+      label="About Us"
+      lines={["Local.", "Honest.", "Helpful."]}
       image="dal"
-      alt="Dawn on Dal Lake, Srinagar — a shikara crossing still water beneath the Kashmir Himalaya"
+      alt="A boat crossing calm water on Dal Lake, Srinagar, with mountains in the background"
       caption="Dal Lake, Srinagar"
       body={
         <>
           <p>
-            For over two decades our specialists have arranged private journeys through the Vale from
-            an office on the Boulevard, a few minutes from the water. We are Srinagar-born; the
-            houseboat, the guide and the mountain host are people we know by name.
+            We&apos;ve been planning trips to Kashmir for over 20 years, from our office in Srinagar,
+            just minutes from Dal Lake. Our team grew up here, so we personally know the houseboat
+            owners, guides, and mountain hosts we work with.
           </p>
           <p className="mt-5">
-            That is what makes a bespoke Kashmir travel agency worth the name — not a catalogue of
-            Kashmir tour packages, but the judgement to say what is genuinely exceptional, and the
-            restraint to leave the rest out.
+            That&apos;s what makes us different from a regular Kashmir travel agency — we don&apos;t
+            hand you a long list of tour packages. We tell you honestly what&apos;s worth doing, and
+            leave out the rest.
           </p>
         </>
       }

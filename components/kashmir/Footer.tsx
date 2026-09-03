@@ -42,7 +42,7 @@ export default function Footer() {
                 S
               </span>
               <p className="k-serif text-[1.35rem] leading-snug md:text-[1.6rem]">
-                Begin Your Journey with {brand.name}
+                Get in Touch with {brand.name}
               </p>
             </div>
           </Reveal>
@@ -83,10 +83,10 @@ export default function Footer() {
                 <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[var(--pine)] text-[var(--pine)]">
                   <Check size={22} />
                 </span>
-                <h3 className="k-serif text-[2rem] leading-tight">Your enquiry is with us.</h3>
+                <h3 className="k-serif text-[2rem] leading-tight">We got your message!</h3>
                 <p className="k-body max-w-md !text-[var(--ink)]/80">
-                  A Srinagar-born specialist will write to you within one working day to begin
-                  shaping your journey — unhurried, and entirely private.
+                  Someone from our Kashmir team will email you within a day to start planning your
+                  trip.
                 </p>
               </Reveal>
             ) : (
@@ -101,13 +101,13 @@ export default function Footer() {
                     error={errors.email}
                   />
                 </div>
-                <FField label="Subject" name="subject" placeholder="Share with us" />
+                <FField label="Subject" name="subject" placeholder="What's this about?" />
                 <label className="flex flex-col gap-3">
                   <span className="k-serif text-[1.05rem] font-medium">Message</span>
                   <textarea
                     name="message"
                     rows={3}
-                    placeholder="Share with us"
+                    placeholder="Tell us about your trip"
                     className="k-line-input resize-none"
                   />
                 </label>
@@ -116,7 +116,7 @@ export default function Footer() {
                   type="submit"
                   className="group mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--ink)] px-7 py-3.5 text-[var(--sand)] transition-colors duration-300 hover:bg-[var(--pine-deep)]"
                 >
-                  <span className="k-label !tracking-[0.16em] !text-inherit">Send enquiry</span>
+                  <span className="k-label !tracking-[0.16em] !text-inherit">Send Message</span>
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </form>
@@ -128,7 +128,7 @@ export default function Footer() {
       <div className="border-t border-[var(--ink)]/15">
         <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center justify-between gap-3 px-6 py-6 md:flex-row md:px-12 lg:px-16">
           <span className="k-num !text-[0.7rem] text-[var(--ink)]/60">
-            © {year} {brand.name} · Bespoke Kashmir Travel · Srinagar, J&amp;K
+            © {year} {brand.name} · Kashmir Travel Agency · Srinagar, J&amp;K
           </span>
           <div className="flex items-center gap-6">
             <span className="k-num !text-[0.7rem] text-[var(--ink)]/60">Privacy</span>
