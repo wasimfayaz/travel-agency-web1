@@ -1,0 +1,185 @@
+/* ============================================================
+   SERAI — Bespoke Kashmir
+   Light, quiet-luxury design system translated from Avenue H's
+   editorial minimalism. Cormorant Garamond carries the display
+   voice; General Sans carries body copy and UI labels.
+   ============================================================ */
+@import url("https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap");
+@import "tailwindcss";
+
+/* ============================================================
+   BASE
+   ============================================================ */
+html {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: #3a4a3c;
+  color: #f4efe6;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #3a4a3c;
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   THEME — palette, type scale, components
+   (formerly scoped to `.k-root` as a guest inside a host site;
+   here it IS the site, so it lives directly on <body>.)
+   ============================================================ */
+.k-root {
+  /* palette */
+  --paper: #f4efe6; /* warm off-white ground */
+  --paper-2: #eae3d6; /* raised surface */
+  --ink: #201d18; /* near-black text */
+  --ink-soft: #4a453c;
+  --stone: #8c8578; /* muted secondary */
+  --stone-light: #a9a294;
+  --line: #ddd4c4; /* hairline */
+  --line-strong: #ccc1ae;
+  --pine: #3a4a3c; /* whisper accent — deep evergreen */
+  --pine-deep: #2b3830;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "General Sans", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.k-serif {
+  font-family: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+  font-weight: 400;
+}
+
+/* ---- type scale -------------------------------------------------- */
+.k-display {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  font-size: clamp(3rem, 1.4rem + 6.6vw, 8.25rem);
+}
+.k-h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.005em;
+  font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem);
+}
+.k-h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  line-height: 1.08;
+  font-size: clamp(1.75rem, 1.2rem + 1.9vw, 2.9rem);
+}
+.k-lead {
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: 0.005em;
+  font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.3125rem);
+  color: var(--ink-soft);
+}
+.k-body {
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0.005em;
+  font-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1.0625rem);
+  color: var(--ink-soft);
+}
+.k-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.6875rem;
+  color: var(--stone);
+}
+.k-num {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+}
+
+/* ---- links & underline sweep ------------------------------------ */
+.k-sweep {
+  position: relative;
+  display: inline-block;
+}
+.k-sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.k-sweep:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* underline that lives, then retracts on hover (nav) */
+.k-underline::after {
+  transform-origin: left;
+}
+.k-underline:hover::after {
+  transform-origin: right;
+  transform: scaleX(0);
+}
+
+.k-hair {
+  border-color: var(--line);
+}
+
+/* ---- art-directed image panels ---------------------------------- */
+.k-figure {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.k-figure img {
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
+}
+.k-figure:hover img {
+  transform: scale(1.045);
+}
+.k-figure::after {
+  /* fine film grain to keep large images from feeling flat */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* duotone ground so a figure reads as intentional even before/without a photo */
+.k-duo-dal { background: linear-gradient(150deg, #cdd7d6 0%, #94a7ac 45%, #566b70 100%); }
+.k-duo-gulmarg { background: linear-gradient(160deg, #e7e9ea 0%, #b9c1c6 40%, #7f8a92 100%); }
+.k-duo-pahalgam { background: linear-gradient(155deg, #c3ccb4 0%, #8ba081 45%, #4f6350 100%); }
+.k-duo-gurez { background: linear-gradient(160deg, #d8ccb6 0%, #a89a7d 45%, #6b6350 100%); }
+.k-duo-houseboat { background: linear-gradient(150deg, #d9cdb3 0%, #b09a74 50%, #6d5b3d 100%); }
+.k-duo-chalet { background: linear-gradient(160deg, #dfe3e4 0%, #aeb7bb 45%, #6f7b7f 100%); }
+.k-duo-hero { background: linear-gradient(165deg, #cdd6d3 0%, #9aabaa 40%, #5c6f6f 78%, #3c4c4b 100%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .k-figure img,
+  .k-figure:hover img {
+    transition: none;
+    transform: none;
+  }
+}
