@@ -10,8 +10,8 @@ export default function Journeys() {
   const { openConcierge } = useConcierge();
 
   return (
-    <section id="journeys" className="scroll-mt-24 border-t k-hair">
-      <div className="mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-16 py-24 md:py-36">
+    <section id="journeys" className="scroll-mt-20 border-t k-hair bg-[var(--paper)]">
+      <div className="mx-auto w-full max-w-[1600px] px-6 py-20 md:px-12 md:py-28 lg:px-16">
         {/* section header */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">

@@ -37,14 +37,15 @@ html {
    ============================================================ */
 .k-root {
   /* palette */
-  --paper: #f4efe6; /* warm off-white ground */
-  --paper-2: #eae3d6; /* raised surface */
+  --paper: #fffdf5; /* ivory — every content section */
+  --paper-2: #faf7ec; /* faint raised surface */
+  --sand: #e4dbc7; /* beige — FOOTER ONLY */
   --ink: #201d18; /* near-black text */
   --ink-soft: #4a453c;
   --stone: #8c8578; /* muted secondary */
   --stone-light: #a9a294;
-  --line: #ddd4c4; /* hairline */
-  --line-strong: #ccc1ae;
+  --line: #e4ded0; /* hairline */
+  --line-strong: #d2cab7;
   --pine: #3a4a3c; /* whisper accent — deep evergreen */
   --pine-deep: #2b3830;
 
@@ -81,6 +82,15 @@ html {
   line-height: 1.08;
   font-size: clamp(1.75rem, 1.2rem + 1.9vw, 2.9rem);
 }
+/* Stacked one-word-per-line panel heading ("Native. Discreet. Unhurried.") */
+.k-panel-h {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: -0.005em;
+  font-size: clamp(2rem, 1.15rem + 1.9vw, 3.4rem);
+}
+
 .k-lead {
   font-weight: 400;
   line-height: 1.62;

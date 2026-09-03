@@ -5,13 +5,17 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { brand, nav } from "./data";
 import { useConcierge } from "./ConciergeContext";
 
+/**
+ * The hero carries its own wordmark row, so this bar stays out of the way
+ * until the content curtain has risen — then it slides in over the ivory.
+ */
 export default function Nav() {
   const { openConcierge } = useConcierge();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.72);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -24,48 +28,27 @@ export default function Nav() {
     };
   }, [mobileOpen]);
 
-  // While the nav floats over the hero video it inverts to light type;
-  // once the paper curtain rises behind it, it returns to ink.
-  const overHero = !scrolled && !mobileOpen;
+  const shown = scrolled || mobileOpen;
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || mobileOpen
-          ? "bg-[#f4efe6]/92 backdrop-blur-md border-b k-hair"
-          : "bg-transparent border-b border-transparent"
+      className={`fixed inset-x-0 top-0 z-50 border-b bg-[var(--paper)]/94 backdrop-blur-md transition-all duration-500 ${
+        shown
+          ? "k-hair translate-y-0 opacity-100"
+          : "-translate-y-full border-transparent opacity-0 pointer-events-none"
       }`}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 md:px-10 xl:px-16 h-[76px]">
-        {/* wordmark */}
-        <a href="#top" className="flex items-baseline gap-2.5 leading-none" aria-label={`${brand.name} — home`}>
-          <span
-            className={`k-serif text-[1.6rem] tracking-[0.18em] transition-colors duration-500 ${
-              overHero ? "text-[#f4efe6]" : "text-[var(--ink)]"
-            }`}
-          >
-            {brand.name}
-          </span>
-          <span
-            className={`hidden sm:inline k-label !text-[0.6rem] !tracking-[0.22em] transition-colors duration-500 ${
-              overHero ? "!text-[#f4efe6]/70" : "text-[var(--stone)]"
-            }`}
-          >
-            {brand.descriptor}
-          </span>
+      <div className="mx-auto flex h-[70px] max-w-[1600px] items-center justify-between gap-6 px-6 md:px-12">
+        <a href="#top" className="leading-none" aria-label={`${brand.name} — home`}>
+          <span className="k-serif text-[1.3rem] tracking-[0.3em] text-[var(--ink)]">{brand.name}</span>
         </a>
 
-        {/* desktop links */}
-        <nav className="hidden lg:flex items-center gap-9">
+        <nav className="hidden items-center gap-9 lg:flex">
           {nav.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className={`k-sweep k-label !tracking-[0.18em] transition-colors duration-500 ${
-                overHero
-                  ? "!text-[#f4efe6]/85 hover:!text-[#f4efe6]"
-                  : "text-[var(--ink-soft)] hover:text-[var(--ink)]"
-              }`}
+              className="k-sweep k-label !tracking-[0.18em] text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)]"
             >
               {item.label}
             </a>
@@ -76,23 +59,19 @@ export default function Nav() {
           <button
             type="button"
             onClick={() => openConcierge()}
-            className={`group inline-flex items-center gap-2 rounded-full border px-6 py-2.5 transition-colors duration-500 ${
-              overHero
-                ? "border-[#f4efe6]/60 text-[#f4efe6] hover:bg-[#f4efe6] hover:text-[var(--ink)]"
-                : "border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)]"
-            }`}
+            className="group inline-flex items-center gap-2 rounded-full border border-[var(--ink)] px-6 py-2.5 text-[var(--ink)] transition-colors duration-300 hover:bg-[var(--ink)] hover:text-[var(--paper)]"
           >
             <span className="k-label !tracking-[0.16em] !text-inherit">Plan Your Journey</span>
-            <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight
+              size={15}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </button>
         </div>
 
-        {/* mobile toggle */}
         <button
           type="button"
-          className={`lg:hidden transition-colors duration-500 ${
-            overHero ? "text-[#f4efe6]" : "text-[var(--ink)]"
-          }`}
+          className="text-[var(--ink)] lg:hidden"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
@@ -104,8 +83,8 @@ export default function Nav() {
       {/* mobile drawer */}
       <div
         aria-hidden={!mobileOpen}
-        className={`lg:hidden fixed inset-x-0 top-[76px] bottom-0 bg-[#f4efe6] transition-transform duration-500 ease-out ${
-          mobileOpen ? "translate-x-0" : "translate-x-full pointer-events-none"
+        className={`fixed inset-x-0 bottom-0 top-[70px] bg-[var(--paper)] transition-transform duration-500 ease-out lg:hidden ${
+          mobileOpen ? "translate-x-0" : "pointer-events-none translate-x-full"
         }`}
       >
         <div className="flex h-full flex-col justify-between px-6 py-10">

@@ -1,50 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { brand } from "./data";
 import { useConcierge } from "./ConciergeContext";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 /**
- * Still frame shown before the video buffers — and in place of it entirely
- * if no file is present. Drop `hero.mp4` (and optionally `hero.webm`) into
- * /public/media to swap in real footage; the layout is identical either way.
+ * Pinned full-bleed hero. Deliberately bare: a wordmark, one line of type and
+ * a single call to action, floating over the film. The video plate is left
+ * blank (a deep neutral ground) until footage is dropped into /public/media.
  */
-const POSTER =
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=85";
-
-function useSrinagarTime() {
-  const [t, setT] = useState("");
-  useEffect(() => {
-    const fmt = () =>
-      new Intl.DateTimeFormat("en-GB", {
-        timeZone: "Asia/Kolkata",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }).format(new Date());
-    setT(fmt());
-    const id = setInterval(() => setT(fmt()), 30000);
-    return () => clearInterval(id);
-  }, []);
-  return t;
-}
-
 export default function Hero() {
   const { openConcierge } = useConcierge();
-  const time = useSrinagarTime();
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // The copy recedes as the white curtain rises over the pinned hero.
   const { scrollY } = useScroll();
-  const copyOpacity = useTransform(scrollY, [0, 480], [1, 0]);
-  const copyY = useTransform(scrollY, [0, 480], [0, 42]);
+  const rowOpacity = useTransform(scrollY, [0, 420], [1, 0]);
 
-  // Stop decoding frames once the curtain has fully covered the hero.
+  // Stop decoding frames once the curtain has covered the hero.
   useEffect(() => {
     const v = videoRef.current;
     if (!v || reduce) return;
@@ -70,23 +44,12 @@ export default function Hero() {
     };
   }, [reduce]);
 
-  const rise = {
-    hidden: { opacity: 0, y: reduce ? 0 : 30 },
-    show: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1, ease: EASE, delay: 0.15 + i * 0.12 },
-    }),
-  };
-
   return (
-    /* Pinned at top:0 — the sections that follow scroll up over this. */
-    <section id="top" className="sticky top-0 z-0 h-[100svh] overflow-hidden">
-      {/* media plate */}
+    <section id="top" className="sticky top-0 z-0 h-[100svh] overflow-hidden bg-[#15140f]">
+      {/* film plate — blank until /public/media/hero.mp4 exists */}
       <video
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
-        poster={POSTER}
         autoPlay={!reduce}
         muted
         loop
@@ -99,90 +62,66 @@ export default function Hero() {
         <source src="/media/hero.mp4" type="video/mp4" />
       </video>
 
-      {/* scrim — vertical weight for the type, plus a soft left bias */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0f0e0b]/60 via-[#0f0e0b]/25 to-[#0f0e0b]/80" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0f0e0b]/55 via-transparent to-transparent" />
+      {/* scrim — kept light; just enough to hold the type */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0f0e0b]/45 via-[#0f0e0b]/15 to-[#0f0e0b]/55" />
 
-      {/* copy */}
+      {/* the only content: one centred row */}
       <motion.div
-        style={reduce ? undefined : { opacity: copyOpacity, y: copyY }}
-        className="k-on-dark relative flex h-full flex-col pt-[76px]"
+        initial={{ opacity: 0, y: reduce ? 0 : 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        className="k-on-dark relative flex h-full items-center"
       >
-        {/* meta bar */}
-        <div className="mx-auto w-full max-w-[1440px] shrink-0 px-5 md:px-10 xl:px-16">
-          <div className="flex items-center justify-between border-b k-hair py-4">
-            <span className="k-num text-[var(--stone)]">Srinagar · 34°N 74°E</span>
-            <span className="hidden sm:inline k-num text-[var(--stone)] tabular-nums">
-              {time || "—"} IST
-            </span>
-            <span className="k-num text-[var(--stone)]">{brand.established}</span>
-          </div>
-        </div>
+        <motion.div
+          style={reduce ? undefined : { opacity: rowOpacity }}
+          className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-6 px-6 md:px-12"
+        >
+          {/* wordmark */}
+          <a
+            href="#top"
+            aria-label={`${brand.name} — home`}
+            className="k-serif shrink-0 text-[1.35rem] tracking-[0.34em] text-[var(--paper)] md:text-[1.7rem]"
+          >
+            {brand.name}
+          </a>
 
-        {/* statement */}
-        <div className="mx-auto flex w-full max-w-[1440px] min-h-0 flex-1 flex-col justify-center px-5 py-10 md:px-10 md:py-14 xl:px-16">
-          <motion.p custom={0} variants={rise} initial="hidden" animate="show" className="k-label mb-6">
-            Bespoke Kashmir Travel Agency
-          </motion.p>
-
-          <h1 className="k-display text-[var(--paper)]">
-            <motion.span custom={1} variants={rise} initial="hidden" animate="show" className="block">
-              Kashmir,
-            </motion.span>
-            <motion.span
-              custom={2}
-              variants={rise}
-              initial="hidden"
-              animate="show"
-              className="block italic text-[#b9c9b7]"
-            >
-              quietly composed.
-            </motion.span>
+          {/* the single line of copy — also the page's H1 */}
+          <h1 className="k-serif hidden flex-1 text-center text-[1.05rem] font-medium tracking-[0.01em] text-[var(--paper)] md:block lg:text-[1.15rem]">
+            A valley of journeys, quietly composed.
           </h1>
 
-          <motion.p
-            custom={3}
-            variants={rise}
-            initial="hidden"
-            animate="show"
-            className="k-lead mt-8 max-w-xl"
-          >
-            A private travel house crafting luxury Kashmir itineraries for a discerning few — heritage
-            houseboats on Dal Lake, heli-ski days above Gulmarg, unhurried Pahalgam retreats, and the
-            offbeat frontier of the Gurez Valley. Composed by Srinagar-born specialists.
-          </motion.p>
-
-          <motion.div
-            custom={4}
-            variants={rise}
-            initial="hidden"
-            animate="show"
-            className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center"
-          >
+          {/* contact */}
+          <div className="flex shrink-0 items-center gap-4 md:gap-6">
             <button
               type="button"
               onClick={() => openConcierge()}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[var(--paper)] px-7 py-4 text-[var(--ink)] transition-colors duration-300 hover:bg-white"
+              className="rounded-full border border-[var(--paper)]/70 px-5 py-2.5 text-[var(--paper)] transition-colors duration-500 hover:bg-[var(--paper)] hover:text-[var(--ink)] md:px-7"
             >
-              <span className="k-label !tracking-[0.16em] !text-inherit">Begin a Private Enquiry</span>
-              <ArrowUpRight
-                size={16}
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
+              <span className="k-label !tracking-[0.2em] !text-inherit">Contact Us</span>
             </button>
-            <a href="#journeys" className="k-sweep k-label !tracking-[0.16em] !text-[var(--paper)]">
-              View Curated Journeys
+            <a
+              href={brand.whatsapp}
+              aria-label="Instagram"
+              className="text-[var(--paper)]/80 transition-colors duration-300 hover:text-[var(--paper)]"
+            >
+              <svg
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+              </svg>
             </a>
-          </motion.div>
-        </div>
-
-        {/* scroll cue */}
-        <div className="mx-auto w-full max-w-[1440px] shrink-0 px-5 md:px-10 xl:px-16">
-          <div className="flex items-center gap-3 border-t k-hair py-5 text-[var(--stone)]">
-            <ArrowDown size={14} className="animate-bounce" />
-            <span className="k-num">Scroll — four signature journeys</span>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

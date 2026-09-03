@@ -1,9 +1,11 @@
 import { ConciergeProvider } from "@/components/kashmir/ConciergeContext";
 import Nav from "@/components/kashmir/Nav";
 import Hero from "@/components/kashmir/Hero";
+import Defines from "@/components/kashmir/Defines";
 import Journeys from "@/components/kashmir/Journeys";
 import Spotlight from "@/components/kashmir/Spotlight";
 import Trust from "@/components/kashmir/Trust";
+import Craft from "@/components/kashmir/Craft";
 import Footer from "@/components/kashmir/Footer";
 import ConciergeDrawer from "@/components/kashmir/ConciergeDrawer";
 import { brand, journeys } from "@/components/kashmir/data";
@@ -84,14 +86,20 @@ export default function HomePage() {
       <main className="relative">
         {/* Hero pins at top:0 (z-0) … */}
         <Hero />
-        {/* … and this curtain of content scrolls up over it. */}
+        {/* … and this ivory curtain scrolls up over it. */}
         <div className="relative z-10 bg-[var(--paper)]">
+          <Defines />
           <Journeys />
           <Spotlight />
           <Trust />
+          {/* The closing panel pins in turn (z-0) so the beige footer
+              curtains up over it, mirroring the hero. */}
+          <div className="sticky top-0 z-0">
+            <Craft />
+          </div>
+          <Footer />
         </div>
       </main>
-      <Footer />
       <ConciergeDrawer />
     </ConciergeProvider>
   );
