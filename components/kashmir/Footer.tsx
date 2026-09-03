@@ -10,7 +10,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t k-hair bg-[var(--ink)] text-[var(--paper)]">
+    <footer className="relative z-10 border-t k-hair bg-[var(--ink)] text-[var(--paper)]">
       {/* invitation */}
       <div className="mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-16 py-24 md:py-32">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">

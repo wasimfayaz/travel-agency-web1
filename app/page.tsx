@@ -81,11 +81,15 @@ export default function HomePage() {
     <ConciergeProvider>
       <JsonLd />
       <Nav />
-      <main>
+      <main className="relative">
+        {/* Hero pins at top:0 (z-0) … */}
         <Hero />
-        <Journeys />
-        <Spotlight />
-        <Trust />
+        {/* … and this curtain of content scrolls up over it. */}
+        <div className="relative z-10 bg-[var(--paper)]">
+          <Journeys />
+          <Spotlight />
+          <Trust />
+        </div>
       </main>
       <Footer />
       <ConciergeDrawer />

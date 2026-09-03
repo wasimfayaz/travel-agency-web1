@@ -180,7 +180,7 @@ export default function ConciergeDrawer() {
                     type="submit"
                     className="group mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--ink)] px-7 py-4 text-[var(--paper)] transition-colors duration-300 hover:bg-[var(--pine-deep)]"
                   >
-                    <span className="k-label !tracking-[0.16em] text-current">Send to the concierge</span>
+                    <span className="k-label !tracking-[0.16em] !text-inherit">Send to the concierge</span>
                     <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
 

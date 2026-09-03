@@ -144,6 +144,20 @@ html {
   border-color: var(--line);
 }
 
+/* ---- light-on-dark subtree (hero over video) ---------------------
+   Re-points the muted/hairline tokens so every k-* type class reads
+   correctly over imagery. `--ink` / `--paper` are deliberately NOT
+   flipped: they carry button fill/knockout semantics, so those are
+   set explicitly in the markup instead. */
+.k-on-dark {
+  --ink-soft: rgba(244, 239, 230, 0.84);
+  --stone: rgba(244, 239, 230, 0.6);
+  --stone-light: rgba(244, 239, 230, 0.78);
+  --line: rgba(244, 239, 230, 0.2);
+  --line-strong: rgba(244, 239, 230, 0.34);
+  color: var(--paper);
+}
+
 /* ---- art-directed image panels ---------------------------------- */
 .k-figure {
   position: relative;
