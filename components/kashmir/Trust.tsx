@@ -1,6 +1,6 @@
 "use client";
 
-import { stats, testimonials } from "./data";
+import { accreditations, safetyNote, stats, testimonials } from "./data";
 import Reveal from "./Reveal";
 
 export default function Trust() {
@@ -48,6 +48,28 @@ export default function Trust() {
                   </footer>
                 </Reveal>
               ))}
+            </div>
+          </div>
+
+          {/* honest safety note + accreditations */}
+          <div className="mt-20 grid grid-cols-1 gap-12 border-t k-hair pt-16 md:mt-28 md:grid-cols-12">
+            <div className="md:col-span-4">
+              <Reveal>
+                <p className="k-label mb-6">Is Kashmir Safe?</p>
+                <p className="k-panel-h text-[var(--ink)]">Yes — and we&apos;re here on the ground.</p>
+              </Reveal>
+            </div>
+            <div className="md:col-span-7 md:col-start-6">
+              <Reveal delay={0.08}>
+                <p className="k-body max-w-xl text-[1.05rem]">{safetyNote}</p>
+                <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-4 border-t k-hair pt-8">
+                  {accreditations.map((a) => (
+                    <li key={a} className="k-label !tracking-[0.14em] !text-[var(--ink)]">
+                      {a}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
             </div>
           </div>
         </div>

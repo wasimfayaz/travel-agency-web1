@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import Figure from "./Figure";
 import Reveal from "./Reveal";
 
-type ImageKey = "hero" | "dal" | "gulmarg" | "pahalgam" | "gurez" | "houseboat" | "chalet";
+type ImageKey = "hero" | "dal" | "gulmarg" | "pahalgam" | "gurez" | "houseboat" | "chalet" | "hotel";
 
 /**
  * The editorial workhorse: a full-bleed photograph running to the page edge on

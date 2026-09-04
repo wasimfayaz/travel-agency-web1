@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
  * any load error we simply keep the colour field (never a broken-image icon).
  */
 
-type Key = "hero" | "dal" | "gulmarg" | "pahalgam" | "gurez" | "houseboat" | "chalet";
+type Key = "hero" | "dal" | "gulmarg" | "pahalgam" | "gurez" | "houseboat" | "chalet" | "hotel";
 
 // Editorial landscape photography (Himalayan lake / pine / snow moods).
 const SOURCES: Record<Key, string> = {
@@ -23,6 +23,8 @@ const SOURCES: Record<Key, string> = {
   houseboat: "/media/houseboat.png",
   // Self-hosted from /public/media — a real cozy cabin, not stock.
   chalet: "/media/cabin.png",
+  // Luxury mountain resort (Unsplash, free-to-use) — swap for a real property photo.
+  hotel: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1600&q=80",
 };
 
 export default function Figure({

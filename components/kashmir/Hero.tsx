@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
 import { brand } from "./data";
 import { useConcierge } from "./ConciergeContext";
 
@@ -9,9 +9,13 @@ import { useConcierge } from "./ConciergeContext";
 // self-hosted — swap for /media/hero.mp4 if you'd rather bundle your own cut.
 const HERO_VIDEO_SRC = "https://videos.pexels.com/video-files/18923430/18923430-uhd_2560_1440_30fps.mp4";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 /**
- * Pinned full-bleed hero. Deliberately bare: a wordmark, one line of type and
- * a single call to action, floating over the film.
+ * Pinned full-bleed hero. An art-directed, asymmetric composition rather than
+ * a row of UI: the headline sits upper-right, the wordmark holds the quiet
+ * centre-left, and the enquiry link closes the frame at the bottom-right —
+ * the landscape itself stays the subject throughout.
  */
 export default function Hero() {
   const { openConcierge } = useConcierge();
@@ -19,7 +23,7 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const { scrollY } = useScroll();
-  const rowOpacity = useTransform(scrollY, [0, 420], [1, 0]);
+  const contentOpacity = useTransform(scrollY, [0, 420], [1, 0]);
 
   // Stop decoding frames once the curtain has covered the hero.
   useEffect(() => {
@@ -47,10 +51,20 @@ export default function Hero() {
     };
   }, [reduce]);
 
+  // Slow, staggered rise — headline first, wordmark, then the enquiry link.
+  const rise: Variants = {
+    hidden: { opacity: 0, y: reduce ? 0 : 10 },
+    show: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 1.3, ease: EASE, delay },
+    }),
+  };
+
   return (
     <section id="top" className="sticky top-0 z-0 h-[100svh] overflow-hidden bg-[#15140f]">
-      {/* film plate — streamed from Pexels */}
-      <video
+      {/* film plate — a very slow, near-imperceptible breathing zoom */}
+      <motion.video
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay={!reduce}
@@ -60,55 +74,65 @@ export default function Hero() {
         preload="metadata"
         aria-hidden="true"
         tabIndex={-1}
+        animate={reduce ? undefined : { scale: [1, 1.015, 1] }}
+        transition={reduce ? undefined : { duration: 34, repeat: Infinity, ease: "easeInOut" }}
       >
         <source src={HERO_VIDEO_SRC} type="video/mp4" />
-      </video>
+      </motion.video>
 
-      {/* scrim — kept light; just enough to hold the type */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0f0e0b]/45 via-[#0f0e0b]/15 to-[#0f0e0b]/55" />
+      {/* one quiet vertical gradient — legible top and bottom, open sky at centre */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#100f0b]/48 via-[#100f0b]/10 to-[#100f0b]/58" />
 
-      {/* the only content: one centred row */}
-      <motion.div
-        initial={{ opacity: 0, y: reduce ? 0 : 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        className="k-on-dark relative flex h-full items-center"
-      >
-        <motion.div
-          style={reduce ? undefined : { opacity: rowOpacity }}
-          className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-6 px-6 md:px-12"
-        >
-          {/* wordmark */}
-          <a
-            href="#top"
-            aria-label={`${brand.name} — home`}
-            className="k-serif shrink-0 text-[1.35rem] tracking-[0.34em] text-[var(--paper)] md:text-[1.7rem]"
-          >
-            {brand.name}
-          </a>
-
-          {/* the single line of copy — also the page's H1 */}
-          <h1 className="k-serif hidden flex-1 text-center text-[1.05rem] font-medium tracking-[0.01em] text-[var(--paper)] md:block lg:text-[1.15rem]">
-            Plan your dream trip to Kashmir.
-          </h1>
-
-          {/* contact */}
-          <div className="flex shrink-0 items-center gap-4 md:gap-6">
-            <button
-              type="button"
-              onClick={() => openConcierge()}
-              className="rounded-full border border-[var(--paper)]/70 px-5 py-2.5 text-[var(--paper)] transition-colors duration-500 hover:bg-[var(--paper)] hover:text-[var(--ink)] md:px-7"
+      {/* composition */}
+      <motion.div style={reduce ? undefined : { opacity: contentOpacity }} className="k-on-dark relative h-full">
+        <div className="mx-auto flex h-full max-w-[1600px] flex-col justify-between px-6 py-10 sm:px-10 sm:py-12 md:px-14 md:py-14 lg:px-20 lg:py-16 xl:px-24 xl:py-20">
+          {/* upper zone — editorial headline, held to the right on larger screens */}
+          <div className="flex justify-start md:justify-end">
+            <motion.h1
+              custom={0.25}
+              variants={rise}
+              initial="hidden"
+              animate="show"
+              className="k-serif max-w-[300px] text-left text-[clamp(1.85rem,1.5rem+2.25vw,4rem)] font-normal leading-[1.08] tracking-[-0.01em] text-[var(--paper)] sm:max-w-[380px] md:max-w-[480px] md:text-right lg:max-w-[520px]"
             >
-              <span className="k-label !tracking-[0.2em] !text-inherit">Contact Us</span>
-            </button>
-            <a
-              href={brand.whatsapp}
+              Discover Kashmir,
+              <br />
+              beyond the ordinary.
+            </motion.h1>
+          </div>
+
+          {/* centre zone — the wordmark, quietly left */}
+          <div className="flex flex-1 items-center">
+            <motion.div custom={0.55} variants={rise} initial="hidden" animate="show">
+              <a
+                href="#top"
+                aria-label={`${brand.name} — home`}
+                className="k-serif block text-[1.1rem] leading-none tracking-[0.42em] text-[var(--paper)] sm:text-[1.2rem]"
+              >
+                {brand.name}
+              </a>
+              <p className="k-num mt-3 !text-[0.65rem] !tracking-[0.32em] text-[var(--paper)]/60">
+                Private Journeys · Kashmir
+              </p>
+            </motion.div>
+          </div>
+
+          {/* lower zone — a subtle social mark, and the one call to action */}
+          <div className="flex items-end justify-between gap-6">
+            <motion.a
+              custom={0.7}
+              variants={rise}
+              initial="hidden"
+              animate="show"
+              href={brand.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Instagram"
-              className="text-[var(--paper)]/80 transition-colors duration-300 hover:text-[var(--paper)]"
+              className="-m-3 p-3 text-[var(--paper)]/40 transition-colors duration-300 hover:text-[var(--paper)]/75"
             >
               <svg
-                width="19"
-                height="19"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -121,8 +145,54 @@ export default function Hero() {
                 <circle cx="12" cy="12" r="4" />
                 <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
               </svg>
-            </a>
+            </motion.a>
+
+            <motion.button
+              custom={0.85}
+              variants={rise}
+              initial="hidden"
+              animate="show"
+              type="button"
+              onClick={() => openConcierge()}
+              className="group -m-3 inline-flex items-center gap-2 border-b border-[var(--paper)]/45 p-3 pb-[calc(0.75rem+1px)] text-[var(--paper)] transition-colors duration-300 hover:border-[var(--paper)]"
+            >
+              <span className="k-label !text-[0.72rem] !tracking-[0.24em] !text-inherit">
+                Plan Your Journey
+              </span>
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                aria-hidden="true"
+              >
+                <path d="M7 17L17 7M17 7H9M17 7V15" />
+              </svg>
+            </motion.button>
           </div>
+        </div>
+
+        {/* scroll cue — bottom centre, barely there */}
+        <motion.div
+          custom={1.05}
+          variants={rise}
+          initial="hidden"
+          animate="show"
+          className="pointer-events-none absolute inset-x-0 bottom-6 flex flex-col items-center gap-2 text-[var(--paper)]/45 md:bottom-8"
+        >
+          <span className="k-num !text-[0.6rem] !tracking-[0.34em]">Scroll</span>
+          <span className="relative h-7 w-px overflow-hidden bg-current/25">
+            <motion.span
+              className="absolute inset-x-0 top-0 h-2.5 bg-current"
+              animate={reduce ? undefined : { y: [0, 20, 0] }}
+              transition={reduce ? undefined : { duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </span>
         </motion.div>
       </motion.div>
     </section>

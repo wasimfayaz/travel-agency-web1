@@ -198,6 +198,7 @@ html {
 .k-duo-gurez { background: linear-gradient(160deg, #d8ccb6 0%, #a89a7d 45%, #6b6350 100%); }
 .k-duo-houseboat { background: linear-gradient(150deg, #d9cdb3 0%, #b09a74 50%, #6d5b3d 100%); }
 .k-duo-chalet { background: linear-gradient(160deg, #dfe3e4 0%, #aeb7bb 45%, #6f7b7f 100%); }
+.k-duo-hotel { background: linear-gradient(155deg, #e7ddce 0%, #b8a88c 48%, #6f6350 100%); }
 .k-duo-hero { background: linear-gradient(165deg, #cdd6d3 0%, #9aabaa 40%, #5c6f6f 78%, #3c4c4b 100%); }
 
 @media (prefers-reduced-motion: reduce) {

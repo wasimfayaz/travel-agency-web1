@@ -4,11 +4,13 @@ import Hero from "@/components/kashmir/Hero";
 import Defines from "@/components/kashmir/Defines";
 import Journeys from "@/components/kashmir/Journeys";
 import Spotlight from "@/components/kashmir/Spotlight";
+import Seasons from "@/components/kashmir/Seasons";
 import Trust from "@/components/kashmir/Trust";
+import Faq from "@/components/kashmir/Faq";
 import Craft from "@/components/kashmir/Craft";
 import Footer from "@/components/kashmir/Footer";
 import ConciergeDrawer from "@/components/kashmir/ConciergeDrawer";
-import { brand, journeys } from "@/components/kashmir/data";
+import { brand, faqs, journeys } from "@/components/kashmir/data";
 
 const SITE = "https://serai-kashmir.com";
 
@@ -67,6 +69,15 @@ function JsonLd() {
           },
         })),
       },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE}/#faq`,
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
     ],
   };
 
@@ -91,7 +102,9 @@ export default function HomePage() {
           <Defines />
           <Journeys />
           <Spotlight />
+          <Seasons />
           <Trust />
+          <Faq />
           {/* The closing panel pins in turn (z-0) so the beige footer
               curtains up over it, mirroring the hero. */}
           <div className="sticky top-0 z-0">

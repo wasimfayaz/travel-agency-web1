@@ -14,8 +14,24 @@ export const brand = {
   email: "journeys@serai-kashmir.com",
   phoneLabel: "+91 194 000 0000",
   whatsapp: "https://wa.me/910000000000",
+  instagram: "https://www.instagram.com/",
   address: "Boulevard Road, Dal Lake · Srinagar 190001 · Jammu & Kashmir, India",
 } as const;
+
+/** Industry memberships / registrations — the kind of proof a real agency shows. */
+export const accreditations = [
+  "J&K Tourism — Registered",
+  "IATO Member",
+  "TAAI Member",
+  "GSTIN Verified",
+] as const;
+
+/**
+ * An honest, reassuring line about travelling to Kashmir — silence reads as
+ * evasive, so the site addresses it plainly rather than ignoring it.
+ */
+export const safetyNote =
+  "Kashmir today is one of India's most welcoming destinations, with tourism at record highs. We are based in Srinagar and travel these routes every week. We watch conditions daily, plan around them, and only ever take you where we would take our own family — so you can relax and enjoy the valley.";
 
 export const nav = [
   { label: "Tour Packages", href: "#journeys" },
@@ -133,6 +149,62 @@ export const stays = [
     meta: ["Gulmarg & Pahalgam", "Helicopter transfers", "On-site host"],
   },
 ];
+
+/** Season guide — the "best time to visit" question every traveller asks. */
+export const seasons = [
+  {
+    id: "spring",
+    name: "Spring",
+    months: "Mar – May",
+    note: "Almond and tulip blossom, the famous Tulip Garden in full colour, and mild, green valleys. The prettiest time to see Srinagar and the gardens.",
+  },
+  {
+    id: "summer",
+    name: "Summer",
+    months: "Jun – Aug",
+    note: "Warm days, cool nights, and open mountain roads. The best season for Pahalgam, Sonamarg, Gurez and high-valley treks. Ideal for families.",
+  },
+  {
+    id: "autumn",
+    name: "Autumn",
+    months: "Sep – Nov",
+    note: "The chinar trees turn gold and crimson and the light is soft and cinematic. Quieter than summer, and a favourite for photographers and honeymooners.",
+  },
+  {
+    id: "winter",
+    name: "Winter",
+    months: "Dec – Feb",
+    note: "Snow blankets Gulmarg for world-class skiing and heli-skiing, and Dal Lake turns misty and still. Cosy houseboats, fewer crowds, real magic.",
+  },
+] as const;
+
+/** Straight answers to the questions travellers actually ask before booking. */
+export const faqs = [
+  {
+    q: "Is it safe to travel to Kashmir right now?",
+    a: "Yes. Tourism is at record highs and the valley is calm and welcoming. We are Srinagar-based, travel these routes every week, monitor conditions daily, and plan every trip around your comfort and safety.",
+  },
+  {
+    q: "Do I need a permit or visa?",
+    a: "International travellers need a standard Indian e-visa. A few border areas like Gurez need an Inner Line Permit — we arrange all permits for you, so there's nothing for you to chase.",
+  },
+  {
+    q: "What is included in a package?",
+    a: "Every trip includes your stays, a private car and driver, a local guide, permits, and all planned activities. We tailor inclusions to you and send a clear, itemised itinerary before you pay anything — flights are quoted separately.",
+  },
+  {
+    q: "When is the best time to visit?",
+    a: "Kashmir is beautiful year-round. Spring for tulips and gardens, summer for the mountains and families, autumn for golden chinars, and winter for snow and skiing in Gulmarg. Tell us what you love and we'll match the season.",
+  },
+  {
+    q: "Can trips be fully customised?",
+    a: "Always. Every itinerary on this site is a starting point. We adjust the pace, stays, dates and budget to fit you — whether it's a honeymoon, a family holiday, or an offbeat expedition.",
+  },
+  {
+    q: "How do I book and pay?",
+    a: "Send us an enquiry and a local expert will reply within a day with a custom plan. Once you're happy, a small deposit confirms the trip and the balance is due closer to travel. We accept bank transfer and major cards.",
+  },
+] as const;
 
 export const stats = [
   { value: "26", label: "Years in business" },
