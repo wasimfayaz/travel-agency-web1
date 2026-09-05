@@ -1,4 +1,5 @@
 import { ConciergeProvider } from "@/components/kashmir/ConciergeContext";
+import Loader from "@/components/kashmir/Loader";
 import Nav from "@/components/kashmir/Nav";
 import Hero from "@/components/kashmir/Hero";
 import Defines from "@/components/kashmir/Defines";
@@ -93,6 +94,7 @@ export default function HomePage() {
   return (
     <ConciergeProvider>
       <JsonLd />
+      <Loader />
       <Nav />
       <main className="relative">
         {/* Hero pins at top:0 (z-0) … */}

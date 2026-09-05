@@ -50,6 +50,8 @@ export type Journey = {
   blurb: string;
   inclusions: string[];
   priceNote: string;
+  priceAmount: string;
+  priceUnit?: string;
   image: string;
   keyword: string;
 };
@@ -70,6 +72,8 @@ export const journeys: Journey[] = [
       "A local guide who knows Srinagar well",
     ],
     priceNote: "From ₹4.8L per couple",
+    priceAmount: "₹4.8L",
+    priceUnit: "per couple",
     image: "dal",
     keyword: "Dal Lake Heritage Houseboats",
   },
@@ -88,6 +92,8 @@ export const journeys: Journey[] = [
       "A cosy cabin high up in the mountains",
     ],
     priceNote: "From ₹7.2L per couple",
+    priceAmount: "₹7.2L",
+    priceUnit: "per couple",
     image: "gulmarg",
     keyword: "Gulmarg Ski Experiences",
   },
@@ -106,6 +112,8 @@ export const journeys: Journey[] = [
       "A fishing trip and picnic in the meadows",
     ],
     priceNote: "From ₹3.9L per couple",
+    priceAmount: "₹3.9L",
+    priceUnit: "per couple",
     image: "pahalgam",
     keyword: "Private Pahalgam Retreats",
   },
@@ -124,6 +132,7 @@ export const journeys: Journey[] = [
       "A walk to the base of Habba Khatoon peak",
     ],
     priceNote: "Price on request",
+    priceAmount: "On request",
     image: "gurez",
     keyword: "Offbeat Gurez Valley Tours",
   },

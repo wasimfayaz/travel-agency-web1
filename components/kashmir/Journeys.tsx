@@ -33,54 +33,73 @@ export default function Journeys() {
           </div>
         </div>
 
-        {/* grid — all four across one line on desktop */}
-        <div className="mt-14 grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 md:mt-20 lg:grid-cols-4">
+        {/* grid — four package cards across one line on desktop */}
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-20 lg:grid-cols-4 lg:gap-5">
           {journeys.map((j, i) => (
-            <Reveal key={j.id} delay={i * 0.06} className="group h-full">
-              <article className="flex h-full flex-col">
-                <button
-                  type="button"
-                  onClick={() => openConcierge(j.name)}
-                  className="flex items-baseline justify-between gap-2 border-b border-t k-hair pb-3 pt-4 text-left"
-                  aria-label={`Enquire about ${j.name}`}
-                >
-                  <span className="k-num !text-[0.65rem] text-[var(--stone)]">{j.index}</span>
-                  <span className="k-label !text-[0.6rem] !tracking-[0.12em]">
-                    {j.region} · {j.nights}
+            <Reveal key={j.id} delay={i * 0.06} className="h-full">
+              <article className="group/card relative flex h-full flex-col border k-hair bg-[var(--paper-2)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--line-strong)]">
+                {/* header band — reads as a package label */}
+                <div className="flex items-center justify-between border-b k-hair px-5 py-3.5">
+                  <span className="k-num !text-[0.62rem] text-[var(--stone)]">{j.index}</span>
+                  <span className="k-label !text-[0.56rem] !tracking-[0.14em] !text-[var(--pine)]">
+                    {j.nights}
                   </span>
-                </button>
+                </div>
 
-                <h3 className="k-serif mt-4 text-[1.25rem] leading-[1.15] text-[var(--ink)]">
-                  {j.name}
-                </h3>
-                <p className="k-num mt-1.5 !text-[0.65rem] text-[var(--stone)]">{j.route}</p>
+                {/* body */}
+                <div className="flex flex-1 flex-col px-5 py-5">
+                  <p className="k-label !text-[0.56rem] !tracking-[0.18em] text-[var(--stone)]">
+                    {j.region}
+                  </p>
+                  <h3 className="k-serif mt-2 text-[1.3rem] leading-[1.12] text-[var(--ink)]">
+                    {j.name}
+                  </h3>
+                  <p className="k-num mt-2 !text-[0.62rem] text-[var(--stone)]">{j.route}</p>
 
-                <p className="k-body mt-3 !text-[0.85rem] !leading-[1.6]">{j.blurb}</p>
+                  <p className="k-body mt-3.5 !text-[0.83rem] !leading-[1.6]">{j.blurb}</p>
 
-                <ul className="mt-4 flex flex-col gap-2">
-                  {j.inclusions.map((inc) => (
-                    <li key={inc} className="flex items-start gap-2.5">
-                      <span className="mt-2 h-px w-3 shrink-0 bg-[var(--line-strong)]" aria-hidden />
-                      <span className="k-body !text-[0.8rem] !leading-[1.5]">{inc}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <p className="k-label mt-5 !text-[0.54rem] !tracking-[0.18em] text-[var(--stone)]">
+                    What&apos;s included
+                  </p>
+                  <ul className="mt-2.5 flex flex-col gap-2">
+                    {j.inclusions.map((inc) => (
+                      <li key={inc} className="flex items-start gap-2.5">
+                        <span className="mt-2 h-px w-3 shrink-0 bg-[var(--line-strong)]" aria-hidden />
+                        <span className="k-body !text-[0.8rem] !leading-[1.5]">{inc}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                <div className="mt-auto flex items-center justify-between gap-3 border-t k-hair pt-4">
-                  <span className="k-label !text-[0.6rem] !tracking-[0.12em] !text-[var(--ink)]">
-                    {j.priceNote}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => openConcierge(j.name)}
-                    className="group/cta !inline-flex shrink-0 items-center gap-1 border-b border-[var(--ink)]/40 pb-0.5 k-label !text-[0.6rem] !tracking-[0.12em] !text-[var(--pine)] transition-colors hover:border-[var(--pine)]"
-                  >
-                    See Details
-                    <ArrowUpRight
-                      size={12}
-                      className="shrink-0 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
-                    />
-                  </button>
+                  {/* price + action */}
+                  <div className="mt-auto flex items-end justify-between gap-3 border-t k-hair pt-4">
+                    <div>
+                      {j.priceAmount !== "On request" && (
+                        <span className="k-label !text-[0.5rem] !tracking-[0.16em] text-[var(--stone)]">
+                          From
+                        </span>
+                      )}
+                      <div className="k-serif text-[1.35rem] leading-none text-[var(--ink)]">
+                        {j.priceAmount}
+                      </div>
+                      {j.priceUnit && (
+                        <span className="k-num mt-1 block !text-[0.56rem] text-[var(--stone)]">
+                          {j.priceUnit}
+                        </span>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => openConcierge(j.name)}
+                      aria-label={`See details and enquire about ${j.name}`}
+                      className="inline-flex shrink-0 items-center gap-1.5 border border-[var(--ink)]/25 px-3.5 py-2 text-[var(--ink)] transition-colors duration-300 after:absolute after:inset-0 after:content-[''] group-hover/card:border-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)]"
+                    >
+                      <span className="k-label !text-[0.55rem] !tracking-[0.14em] !text-inherit">
+                        See Details
+                      </span>
+                      <ArrowUpRight size={12} className="shrink-0" />
+                    </button>
+                  </div>
                 </div>
               </article>
             </Reveal>
